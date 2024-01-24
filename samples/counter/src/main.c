@@ -9,6 +9,7 @@
 
 #include "thingset/can.h"
 #include "thingset/sdk.h"
+#include <thingset.h>
 
 static uint32_t counter;
 static float pi = 3.14F;
@@ -42,13 +43,11 @@ static void report_rx_callback(uint16_t data_id, const uint8_t *value, size_t va
 
     printf(" ");
 
-    struct thingset_data_object *obj = NULL;
-    while ((obj = thingset_iterate_subsets(&ts, TS_SUBSET_LIVE, obj)) != NULL) {
-        if (data_id == obj->id) {
-            break;
-        }
-        obj++;
-    }
+    const struct thingset_data_object *obj = thingset_get_object_by_id(&ts, data_id);
+
+    struct thingset_data_object object = {};
+    thingset_bin_test(&ts, data_id, value, value_len, &object);
+    printf("data %X ", *object.data.u32);
 
     printf("type %u ", obj->type);
 
