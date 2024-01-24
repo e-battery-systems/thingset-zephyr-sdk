@@ -1,0 +1,48 @@
+
+&pinctrl {
+
+	spim3_default: spim3_default {
+		group1 {
+			pinmux = <SPIM3_MISO_GPIO19>,
+				 <SPIM3_SCLK_GPIO18>;
+		};
+		group2 {
+			pinmux = <SPIM3_MOSI_GPIO23>;
+			output-low;
+		};
+	};
+};
+
+&wifi {
+	status = "okay";
+};
+
+&spi3 {
+	status = "okay";
+	pinctrl-0 = <&spim3_default>;
+	cs-gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
+
+	mcp2515: mcp2515@0 {
+		compatible = "microchip,mcp2515";
+		spi-max-frequency = <400000>;
+		int-gpios = <&gpio0 4 GPIO_ACTIVE_LOW>;
+		status = "okay";
+		reg = <0x0>;
+		osc-freq = <10000000>;
+		bus-speed = <500000>;
+		sjw = <1>;
+		sample-point = <875>;
+
+		can-transceiver {
+			max-bitrate = <1000000>;
+		};
+	};
+};
+
+/ {
+	chosen {
+		zephyr,canbus = &mcp2515;
+	};
+
+
+};
