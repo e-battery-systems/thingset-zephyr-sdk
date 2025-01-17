@@ -6,7 +6,7 @@ manifest:
     - name: zephyrproject
       url-base: https://github.com/zephyrproject-rtos
     - name: thingset
-      url-base: https://github.com/ThingSet
+      url-base: https://github.com/e-battery-systems
     - name: libresolar
       url-base: https://github.com/LibreSolar
   projects:
@@ -29,6 +29,6 @@ manifest:
           - tinycrypt
     - name: thingset-node-c
       remote: thingset
-      revision: d3338c7623869637bc6ce0b95358e44db2a3443f
+      revision: c22ea45e15bbf74aeac4219318dca7d8d8f186bb
       path: modules/thingset-node-c
       import: true

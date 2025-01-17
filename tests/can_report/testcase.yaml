@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+
+tests:
+  thingset_sdk.can_report:
+    integration_platforms:
+      - native_posix_64
+    extra_args: EXTRA_CFLAGS=-Werror
+  thingset_sdk.can_report.isotp_fast:
+    integration_platforms:
+      - native_posix_64
+    extra_args: EXTRA_CFLAGS=-Werror
+    extra_configs:
+      - CONFIG_ISOTP_FAST=y
+      - CONFIG_ISOTP_USE_TX_BUF=y
